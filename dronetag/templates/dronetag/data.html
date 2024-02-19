@@ -1,0 +1,56 @@
+{% extends 'dronetag/home.html' %}
+
+{% block content %}
+     <h1>Drone Data Dashboard</h1>
+
+    <h2>Telemetry Data</h2>
+    <canvas id="telemetryChart" width="400" height="200"></canvas>
+
+    <h2>Status Data</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Battery Voltage</th>
+                <!-- Add more status fields here -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for status_message in status_data %}
+            <tr>
+                <td>{{ status_message.time }}</td>
+                <td>{{ status_message.time_recevied }}</td>
+                <td>{{ status_message.battery_voltage }}</td>
+                <td>{{ status_message.is_charging }}</td>
+                <td>{{ status_message.cellid }}</td>
+                <td>{{ status_message.ac }}</td>
+                <td>{{ status_message.rsrp }}</td>
+                <td>{{ status_message.rsrq }}</td>
+                <td>{{ status_message.snr }}</td>
+
+            </tr>
+            {% endfor %}
+              {% for telemetry_message in telemetry_data %}
+                    <tr>
+                        <td>Time: {{ telemetry_message.time }}</td>
+                        <td>Time_recived: {{ telemetry_message.time_recevied }}</td>
+                        <td>{{ telemetry_message.latitude }}</td>
+                        <td>{{ telemetry_message.longitude }}</td>
+                        <td>{{ telemetry_message.altitude }}</td>
+                        <td>{{ telemetry_message.geo_altitude }}</td>
+                        <td>{{ telemetry_message.height }}</td>
+                        <td>{{ telemetry_message.velocity_x }}</td>
+                        <td>{{ telemetry_message.velocity_y }}</td>
+                        <td>{{ telemetry_message.velocity_z }}</td>
+                        <td>{{ telemetry_message.horizontal_accuracy }}</td>
+                        <td>{{ telemetry_message.vertical_accuracy }}</td>
+                        <td>{{ telemetry_message.speed_accuracy }}</td>
+                        <td>{{ telemetry_message.pressure }}</td>
+
+                    </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'dronetag/home.html' %}
+
+{% block content %}
+    <div class="container-fluid pt-4 px-4">
+     <div class="bg-secondary rounded h-100 p-4">
+     <div class="row g-4">
+     <div class="col-sm-6 col-xl-3">
+                <p>Map of drone movement</p>
+                <div>{{ map_html|safe }}</div>
+                 {% if telemetry_data %}
+                    <p>Latitude: {{ telemetry_data.last.latitude }}</p>
+                    <p>Longitude: {{ telemetry_data.last.longitude }}</p>
+                 {% endif %}
+
+     </div>
+     </div>
+    </div>
+
+    <div class="container-fluid pt-4 px-4">
+        <h1>Telemetry Data</h1>
+        {% if telemetry_data %}
+
+        <div class="row g-4">
+            <div class="col-sm-6 col-xl-3"><p class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">Time, Date: {{ telemetry_data.last.time }}</p></div>
+            <div class="col-sm-6 col-xl-3">
+                <p class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">Time, Date data recevied: {{ telemetry_data.last.time_recevied }}</p>
+            </div>
+
+            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4"><
+                <p>Altitude: {{ telemetry_data.last.altitude }}</p>
+                <p>Geographical Altitude: {{ telemetry_data.last.geo_altitude }}</p>
+                <p>Height: {{ telemetry_data.last.height }}</p>
+                <p>Velocity X: {{ telemetry_data.last.velocity_x }}</p>
+                <p>Velocity Y: {{ telemetry_data.last.velocity_y }}</p>
+                <p>Velocity Z: {{ telemetry_data.last.velocity_z }}</p>
+                <p>Horizontal Accuracy: {{ telemetry_data.last.horizontal_accuracy }}</p>
+                <p>Vertical Accuracy: {{ telemetry_data.last.vertical_accuracy }}</p>
+                <p>Speed Accuracy: {{ telemetry_data.last.speed_accuracy }}</p>
+                <p>Pressure: {{ telemetry_data.last.pressure }}</p>
+            </div>
+        </div>
+        </div>
+        {% endif %}
+
+
+        {% if status_data %}
+            <div class="container-fluid pt-4 px-4">
+            <h1>Status Data</h1>
+            <div class="row g-4">
+
+            <div class="col-sm-6 col-xl-3">
+                <p class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">Time, Date: {{ status_data.last.time }}</p>
+            </div>
+
+            <div class="col-sm-6 col-xl-3">
+                <p class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">>Time, Date data recevied: {{ status_data.last.time_recevied }}</p>
+            </div>
+
+            <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                <p>>Battery voltage in volts: {{ status_data.last.battery }}}</p>
+                <p>Indicates if the device is currently charging: {{ status_data.last.charging }}</p>
+                <p>Number of visible GNSS satellites: {{ status_data.last.satellites }}</p>
+                <p>ID of the current LTE cell station: {{ status_data.last.cellid }}</p>
+                <p>Tracking Area Code of LTE: {{ status_data.last.tac }}</p>
+                <p>Reference Signal Received Power of LTE in dBm: {{ status_data.last.rsrp }}</p>
+                <p>Reference Signal Received Quality of LTE in dB: {{ status_data.last.rsrq }}</p>
+                <p>Signal to Noise Ratio of LTE in dB: {{ status_data.last.snr }}</p>
+            </div>
+
+            </div>
+            </div>
+        {% endif %}
+
+
+
+
+{% endblock %}
