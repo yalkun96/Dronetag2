@@ -8,13 +8,12 @@
                 <p>Map of drone movement</p>
                 <div>{{ map_html|safe }}</div>
                  {% if telemetry_data %}
-                    <p>Latitude: {{ telemetry_data.last.latitude }}</p>
-                    <p>Longitude: {{ telemetry_data.last.longitude }}</p>
+                    <p style="font-size: 15px">Latitude: {{ telemetry_data.last.latitude }}</p>
+                    <p style="font-size: 15px">Longitude: {{ telemetry_data.last.longitude }}</p>
                  {% endif %}
-
      </div>
      </div>
-    </div>
+     </div>
 
     <div class="container-fluid pt-4 px-4">
         <h1>Telemetry Data</h1>
