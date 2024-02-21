@@ -1,38 +1,48 @@
 {% extends 'dronetag/home.html' %}
 
 {% block content %}
+
     <div class="container-fluid pt-4 px-4" id="map-container">
-        <div class="row g-4">
-         <div class="col-sm-6 col-xl-3">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <p>Latency: {{ latency|safe }}</p>
-                </div>
-         </div>
-        <div class="col-sm-6 col-xl-3">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <p>locations: {{ locations|safe }}</p>
-                </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <p>altitudes: {{ altitudes|safe }}</p>
-                </div>
-        </div>
-         <div class="col-sm-6 col-xl-3">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <p>lte_cells: {{ lte_cells|safe }}</p>
-                </div>
-        </div>
-         <div class="col-sm-6 col-xl-3">
-                <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                    <p>average_rsrp_by_cell: {{ average_rsrp_by_cell|safe }}</p>
-                </div>
-        </div>
+    <div class="bg-secondary rounded h-100 p-4">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Latency</th>
+                        <th>Longitude </th>
+                        <th>Latitude</th>
+                        <th>Altitude</th>
+                        <th>Cell ID</th>
+                        <th>Average rsrp by cell</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ latency|safe }}</td>
+                    </tr>
+                        <td>{{  average_rsrp_by_cell }}</td>
+                        {% if telemetry_data %}
+                            <td>{{ telemetry_data.last.longitude }}</td>
+                            <td>{{ telemetry_data.last.latitude }}</td>
+                            <td>{{ telemetry_data.last.altitude }}</td>
+                        {% else %}
+                            <td>No telemetry data available</td>
+                        {% endif %}
+                        {% if status_data %}
+                            <td>{{ status_data.last.cellid }}</td>
+                        {% else %}
+                        {% endif %}
+                        <td>{{ average_rsrp_by_cell_last }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 
 
-            </div>
+
+
       <div class="container-fluid pt-4 px-4" id="map-container">
         <div class="row g-4">
             <div class="bg-secondary text-center rounded p-4">
@@ -72,12 +82,7 @@
                     <div>{{ telemetry_interval_html|safe }}</div>
                 </div>
             </div>
-
-            <!-- Placeholder for Latency -->
-
-
         </div>
 
 
 {% endblock %}
-
